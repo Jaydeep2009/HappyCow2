@@ -45,24 +45,27 @@
     </div>
 
     <script>
-        let currentTemperature = 22.5; // Initial room temperature value
-        let currentHeartRate = 75; // Initial normal heart rate value
+        let currentTemperature = 32.0; // Initial value for body temperature simulation (29-35°C)
+        let currentHeartRate = 92; // Initial normal heart rate value (90-95 bpm)
 
-        // Function to subtly generate new temperature values
+        // Function to subtly generate new temperature values between 29 and 35°C
         function generateRandomTemperature() {
             const randomChange = (Math.random() * 0.2 - 0.1).toFixed(2); // Small change between -0.1°C and 0.1°C
             currentTemperature = (parseFloat(currentTemperature) + parseFloat(randomChange)).toFixed(1);
 
+            // Ensure temperature stays within 29 and 35°C range
+            currentTemperature = Math.min(35, Math.max(29, currentTemperature));
+
             updateTemperature(currentTemperature);
         }
 
-        // Function to generate random heart rate values with realistic small changes
+        // Function to generate random heart rate values between 90-95 bpm
         function generateRandomHeartRate() {
-            const randomChange = (Math.random() * 0.5 - 0.25); // Very small change between -0.25 and 0.25 bpm
+            const randomChange = (Math.random() * 0.5 - 0.25); // Small change between -0.25 and 0.25 bpm
             currentHeartRate = (parseFloat(currentHeartRate) + randomChange).toFixed(1);
 
-            // Ensure heart rate stays within 60 and 100 bpm range
-            currentHeartRate = Math.min(100, Math.max(60, currentHeartRate));
+            // Ensure heart rate stays within 90 and 95 bpm range
+            currentHeartRate = Math.min(95, Math.max(90, currentHeartRate));
 
             updateHeartRate(currentHeartRate);
         }
